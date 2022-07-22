@@ -4,20 +4,32 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import api from "../API/api";
+import OwlCarousel from 'react-owl-carousel';
 
-class HotCollections extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-    };
+const HotCollections = () => {
 
     axios.get(api.HotCollectionsApi).then((response) => {
       console.log(response.data);
     });
+    const options = {
+      loop: true,
+      margin: 10,
+      nav: true,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        480: {
+          items: 2,
+        },
+        830: {
+          items: 3,
+        },
+        1024: {
+          items: 4,
+        },
+      },
+    };
 
     return (
       <section id="section-collections" className="no-bottom">
@@ -29,12 +41,14 @@ class HotCollections extends Component {
                 <div className="small-border bg-color-2"></div>
               </div>
             </div>
-              {new Array(4).fill(0).map((_, index) => (
-                <div
-                  className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                  key={index}
-                >
-                  <div className="nft_coll" >
+            <>
+            <OwlCarousel className="owl-theme" {...options}>
+              {new Array(5).fill(0).map((_, index) => (
+                // <div
+                //   className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                 
+                // >
+                  <div className="nft_coll"  key={index} >
                     <div className="nft_wrap">
                       <Link to="/item-details">
                         <img src={nftImage} className="lazy img-fluid" alt="" />
@@ -57,13 +71,14 @@ class HotCollections extends Component {
                       <span>ERC-192</span>
                     </div>
                   </div>
-                </div>
+                // </div>
               ))}
+              </OwlCarousel>
+              </>
           </div>
         </div>
       </section>
     );
-  }
 }
 
 export default HotCollections;
