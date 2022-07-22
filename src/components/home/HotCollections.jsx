@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import api from "../API/api";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 class HotCollections extends Component {
   render() {
@@ -14,7 +11,7 @@ class HotCollections extends Component {
       dots: true,
       infinite: false,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
     };
 
@@ -32,13 +29,12 @@ class HotCollections extends Component {
                 <div className="small-border bg-color-2"></div>
               </div>
             </div>
-            <Slider {...settings}>
               {new Array(4).fill(0).map((_, index) => (
                 <div
                   className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
                   key={index}
                 >
-                  <div className="nft_coll">
+                  <div className="nft_coll" >
                     <div className="nft_wrap">
                       <Link to="/item-details">
                         <img src={nftImage} className="lazy img-fluid" alt="" />
@@ -63,7 +59,6 @@ class HotCollections extends Component {
                   </div>
                 </div>
               ))}
-            </Slider>
           </div>
         </div>
       </section>
